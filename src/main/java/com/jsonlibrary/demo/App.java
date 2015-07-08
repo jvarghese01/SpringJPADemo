@@ -5,7 +5,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.jsonlibrary.demo.entities.Filestore;
 import com.jsonlibrary.demo.entities.Item;
+import com.jsonlibrary.demo.repository.FilestoreRepository;
 import com.jsonlibrary.demo.repository.ItemRepository;
 
 @SpringBootApplication
@@ -13,6 +15,9 @@ public class App implements CommandLineRunner {
 
     @Autowired
     ItemRepository repository;
+    
+    @Autowired
+    FilestoreRepository filestoreRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(App.class);
@@ -48,6 +53,14 @@ public class App implements CommandLineRunner {
         for (Item result : repository.findByIsbn("12345")) {
             System.out.println(result);
         }
+        
+        Filestore f = new Filestore();
+        f.setFileName("fileName2");
+        f.setFileID("12345");
+        
+        filestoreRepository.save(f);
+
+        
     }
 
 }
